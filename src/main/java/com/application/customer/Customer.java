@@ -1,4 +1,12 @@
 package com.application.customer;
 
-public class Customer {
+
+public record Customer(
+        int id,
+        String name,
+        String lastname,
+
+        String email,
+        String status) {
+
 }

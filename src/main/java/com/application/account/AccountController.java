@@ -10,7 +10,7 @@ import java.util.UUID;
 @RequestMapping("/account")
 public class AccountController {
 
-    private AccountServiceImpl accountService;
+    private final AccountServiceImpl accountService;
 
     public AccountController(AccountServiceImpl accountService) {
         this.accountService = accountService;
@@ -28,6 +28,13 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     public Account findById(@PathVariable UUID id) {
         return accountService.findById(id);
+    }
+
+    @GetMapping("/customer/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public com.application.customer.Customer getCustomer(@PathVariable int id) {
+        return accountService.getCustomer(id);
     }
 
     @PutMapping("/{id}")

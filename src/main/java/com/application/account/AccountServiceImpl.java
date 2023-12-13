@@ -1,5 +1,6 @@
 package com.application.account;
 
+import com.application.customer.CustomerServiceClient;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -35,5 +36,10 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public void delete(UUID id) {
         accountRepository.deleteById(id);
+    }
+
+    public com.application.customer.Customer getCustomer(int id) {
+        CustomerServiceClient customerServiceClient = new CustomerServiceClient();
+        return customerServiceClient.getCustomer(id);
     }
 }
