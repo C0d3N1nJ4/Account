@@ -9,9 +9,9 @@ public interface AccountService {
 
         Account create(Account account);
 
-        Account findById(UUID id);
+        Account findById(String id);
 
-        Account update(UUID id, Account account);
+        Account update(String id, Account account);
 
-        void delete(UUID id);
+        void delete(String id);
 }

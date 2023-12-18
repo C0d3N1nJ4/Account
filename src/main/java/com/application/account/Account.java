@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Account {
     @Id
     @GeneratedValue
-    UUID id;
+    String id;
     AccountType accountType;
     String accountDescription;
     String customerId;
