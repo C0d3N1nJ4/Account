@@ -20,12 +20,12 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account findById(UUID id) {
+    public Account findById(String id) {
         return accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account not found"));
     }
 
     @Override
-    public Account update(UUID id, Account account) {
+    public Account update(String id, Account account) {
         if (accountRepository.existsById(id)) {
             return accountRepository.save(account);
         } else {
@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(String id) {
         accountRepository.deleteById(id);
     }
 

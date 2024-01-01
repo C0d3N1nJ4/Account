@@ -4,8 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -26,7 +24,7 @@ public class AccountController {
     @GetMapping("/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Account findById(@PathVariable UUID id) {
+    public Account findById(@PathVariable String id) {
         return accountService.findById(id);
     }
 
@@ -40,12 +38,12 @@ public class AccountController {
     @PutMapping("/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Account update(@PathVariable UUID id, @RequestBody Account account) {
+    public Account update(@PathVariable String id, @RequestBody Account account) {
         return accountService.update(id, account);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable UUID id) {
+    public void delete(@PathVariable String id) {
         accountService.delete(id);
     }
 
