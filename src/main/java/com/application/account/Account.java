@@ -11,10 +11,8 @@ import java.util.UUID;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue
     String id;
     AccountType accountType;
     String accountDescription;
     String customerId;
-
 }

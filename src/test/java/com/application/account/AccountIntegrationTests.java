@@ -40,4 +40,11 @@ public class AccountIntegrationTests {
                 .andExpect(status().isNotFound());
 
     }
+
+    @Test
+    public void getAccountByIdTest_StatusOK() throws Exception{
+        mockMvc.perform(get("/account/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
 }
