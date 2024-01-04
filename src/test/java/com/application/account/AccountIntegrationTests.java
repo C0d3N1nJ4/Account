@@ -29,8 +29,15 @@ public class AccountIntegrationTests {
 
     @Test
     public void getAllCustomersTest_StatusOK() throws Exception{
-        mockMvc.perform(get("/customers").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/account/customer/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void getAccountByIdTest_StatusNotFound() throws Exception{
+        mockMvc.perform(get("/account/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
 
     }
 }

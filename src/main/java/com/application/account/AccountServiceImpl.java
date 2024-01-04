@@ -3,7 +3,7 @@ package com.application.account;
 import com.application.customer.CustomerServiceClient;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService{
@@ -20,8 +20,8 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account findById(String id) {
-        return accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account not found"));
+    public Optional<Account> findById(String id) {
+        return accountRepository.findById(id);
     }
 
     @Override
@@ -38,8 +38,12 @@ public class AccountServiceImpl implements AccountService{
         accountRepository.deleteById(id);
     }
 
-    public com.application.customer.Customer getCustomer(int id) {
+    public com.application.customer.Customer getCustomer(String id) {
         CustomerServiceClient customerServiceClient = new CustomerServiceClient();
         return customerServiceClient.getCustomer(id);
+    }
+
+    public boolean existsById(String id) {
+        return accountRepository.existsById(id);
     }
 }

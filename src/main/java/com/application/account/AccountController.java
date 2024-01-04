@@ -1,8 +1,11 @@
 package com.application.account;
 
+import com.application.exceptions.AccountNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/account")
@@ -24,14 +27,18 @@ public class AccountController {
     @GetMapping("/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Account findById(@PathVariable String id) {
-        return accountService.findById(id);
+    public Optional<Account> findById(@PathVariable String id) {
+        if (accountService.existsById(id)) {
+            return accountService.findById(id);
+        } else {
+            throw new AccountNotFoundException(id);
+        }
     }
 
     @GetMapping("/customer/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public com.application.customer.Customer getCustomer(@PathVariable int id) {
+    public com.application.customer.Customer getCustomer(@PathVariable String id) {
         return accountService.getCustomer(id);
     }
 

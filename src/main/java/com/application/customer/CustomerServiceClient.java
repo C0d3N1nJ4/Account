@@ -6,7 +6,7 @@ public class CustomerServiceClient {
 
     private final String apiURL = "http://localhost:8080/customers";
 
-    public Customer getCustomer(int id) {
+    public Customer getCustomer(String id) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(apiURL + "/" + id, Customer.class);
     }
