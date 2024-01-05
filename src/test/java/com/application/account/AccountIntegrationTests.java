@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -36,7 +37,7 @@ public class AccountIntegrationTests {
 
     @Test
     public void getAccountByIdTest_StatusNotFound() throws Exception{
-        mockMvc.perform(get("/account/1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/account/4").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 
     }
@@ -44,6 +45,13 @@ public class AccountIntegrationTests {
     @Test
     public void getAccountByIdTest_StatusOK() throws Exception{
         mockMvc.perform(get("/account/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void postAccountTest_StatusOK() throws Exception{
+        mockMvc.perform(post("/account/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
