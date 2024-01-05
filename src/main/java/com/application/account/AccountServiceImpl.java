@@ -11,8 +11,11 @@ public class AccountServiceImpl implements AccountService{
 
     private final AccountRepository accountRepository;
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    private final CustomerServiceClient customerServiceClient;
+
+    public AccountServiceImpl(AccountRepository accountRepository, CustomerServiceClient customerServiceClient) {
         this.accountRepository = accountRepository;
+        this.customerServiceClient = customerServiceClient;
     }
 
     @Override
@@ -54,11 +57,6 @@ public class AccountServiceImpl implements AccountService{
     }
 
     public com.application.customer.Customer getCustomer(String id) {
-        CustomerServiceClient customerServiceClient = new CustomerServiceClient();
         return customerServiceClient.getCustomer(id);
-    }
-
-    public boolean existsById(String id) {
-        return accountRepository.existsById(id);
     }
 }
