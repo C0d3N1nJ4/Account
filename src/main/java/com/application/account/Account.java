@@ -14,5 +14,6 @@ public class Account {
     String id;
     AccountType accountType;
     String accountDescription;
+    AccountStatus accountStatus;
     String customerId;
 }

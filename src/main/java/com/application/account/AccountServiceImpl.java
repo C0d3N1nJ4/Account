@@ -3,6 +3,7 @@ package com.application.account;
 import com.application.customer.CustomerServiceClient;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,16 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public Optional<Account> findById(String id) {
         return accountRepository.findById(id);
+    }
+
+    @Override
+    public List<Account> findByAccountStatus(AccountStatus accountStatus) {
+        return accountRepository.findByAccountStatus(accountStatus);
+    }
+
+    @Override
+    public List<Account> findByAccountType(AccountType accountType) {
+        return accountRepository.findByAccountType(accountType);
     }
 
     @Override
