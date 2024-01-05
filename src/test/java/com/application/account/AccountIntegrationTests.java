@@ -132,4 +132,10 @@ public class AccountIntegrationTests {
                 .andExpect(status().isBadRequest());
 
     }
+
+    @Test
+    public void getAccountByStatusTest_StatusOK() throws Exception{
+        mockMvc.perform(get("/account/filter/status/ACTIVE").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

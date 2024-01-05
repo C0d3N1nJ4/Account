@@ -36,7 +36,7 @@ public class AccountController {
         }
     }
 
-    @GetMapping("filter/{status}")
+    @GetMapping("filter/status/{status}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Iterable<Account> findByAccountStatus(@PathVariable("status") String status) {
@@ -47,7 +47,7 @@ public class AccountController {
         }
     }
 
-    @GetMapping("filter/{type}")
+    @GetMapping("/filter/type/{type}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Iterable<Account> findByAccountType(@PathVariable("type") String accountType) {
