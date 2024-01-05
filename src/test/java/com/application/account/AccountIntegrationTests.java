@@ -78,6 +78,22 @@ public class AccountIntegrationTests {
     }
 
     @Test
+    public void postAccountWithIncorrectCustomerIdTest_StatusBadRequest() throws Exception{
+        mockMvc.perform(post("/account")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                    "id": "10",
+                                    "accountType": 1,
+                                    "accountDescription": "Test Account",
+                                    "customerId": "100"
+                                }
+                                """))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
     public void postIncorrectAccountTypeTest_StatusBadRequest() throws Exception{
         mockMvc.perform(post("/account")
                         .contentType(MediaType.APPLICATION_JSON)

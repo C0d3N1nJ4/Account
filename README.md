@@ -3,6 +3,8 @@
 ## Description
 The account service is responsible for managing the user accounts. It provides the following functionality:
 - Create a new account
+  - For an account to be created, the customer should be an existing customer in the customer service.
+  - Only Account Types of SAVINGS, CHEQUE and CREDIT are allowed.
 - Update an existing account
 - Delete an existing account
 - Get an existing account
@@ -16,6 +18,3 @@ The API documentation is available at [http://localhost:8080/swagger-ui.html](ht
 - Java 17
 - Maven 3.8.2
 - Customer service running on port 8080
-
-
-- 

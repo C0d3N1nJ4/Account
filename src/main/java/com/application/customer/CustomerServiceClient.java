@@ -1,5 +1,6 @@
 package com.application.customer;
 
+import com.application.exceptions.CustomerNotFoundException;
 import org.springframework.web.client.RestTemplate;
 
 public class CustomerServiceClient {
@@ -8,8 +9,12 @@ public class CustomerServiceClient {
 
     public Customer getCustomer(String id) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(apiURL + "/" + id, Customer.class);
-    }
+        try {
+            return restTemplate.getForObject(apiURL + "/" + id, Customer.class);
+        } catch (Exception e) {
+            throw new CustomerNotFoundException(id);
+        }
+}
 
 
 }
