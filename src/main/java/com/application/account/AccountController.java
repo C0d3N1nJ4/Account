@@ -4,6 +4,7 @@ import com.application.exceptions.AccountNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -32,6 +33,28 @@ public class AccountController {
             return accountService.findById(id);
         } else {
             throw new AccountNotFoundException(id);
+        }
+    }
+
+    @GetMapping("filter/{status}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<Account> findByAccountStatus(@PathVariable("status") String status) {
+        if (status.equals("ACTIVE") || status.equals("INACTIVE")) {
+            return accountService.findByAccountStatus(AccountStatus.valueOf(status));
+        } else {
+            throw new AccountNotFoundException(status);
+        }
+    }
+
+    @GetMapping("filter/{type}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<Account> findByAccountType(@PathVariable("type") String accountType) {
+        if (accountType.equals("SAVINGS") || accountType.equals("CHEQUE") || accountType.equals("CREDIT")) {
+            return accountService.findByAccountType(AccountType.valueOf(accountType));
+        } else {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
         }
     }
 
