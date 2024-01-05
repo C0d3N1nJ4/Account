@@ -20,7 +20,7 @@ public class AccountController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public Account create(Account account) {
+    public Account create(@RequestBody Account account) {
         return accountService.create(account);
     }
 

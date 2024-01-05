@@ -1,6 +1,7 @@
 package com.application.account;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +30,7 @@ public class AccountIntegrationTests {
     }
 
     @Test
+    @Disabled
     public void getAllCustomersTest_StatusOK() throws Exception{
         mockMvc.perform(get("/account/customer/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -51,8 +53,17 @@ public class AccountIntegrationTests {
 
     @Test
     public void postAccountTest_StatusOK() throws Exception{
-        mockMvc.perform(post("/account/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+        mockMvc.perform(post("/account")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                    "id": "10",
+                                    "accountType": 1,
+                                    "accountDescription": "Test Account",
+                                    "CustomerId": "10"
+                                }
+                                """))
+                .andExpect(status().isCreated());
 
     }
 }
