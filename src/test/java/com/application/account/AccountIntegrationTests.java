@@ -62,7 +62,7 @@ public class AccountIntegrationTests {
                                     "id": "10",
                                     "accountType": 1,
                                     "accountDescription": "Test Account",
-                                    "customerId": "10"
+                                    "customerId": "1"
                                 }
                                 """))
                 .andExpect(status().isCreated())
@@ -71,7 +71,7 @@ public class AccountIntegrationTests {
                                     "id": "10",
                                     "accountType": "CURRENT",
                                     "accountDescription": "Test Account",
-                                    "customerId": "10"
+                                    "customerId": "1"
                                 }
                                 """));
 
@@ -102,7 +102,7 @@ public class AccountIntegrationTests {
                                     "id": "10",
                                     "accountType": 1,
                                     "accountDescription": "Test Account",
-                                    "customerId": "8"
+                                    "customerId": "1"
                                 }
                                 """))
                 .andExpect(status().isCreated())
@@ -111,7 +111,7 @@ public class AccountIntegrationTests {
                                     "id": "10",
                                     "accountType": "CURRENT",
                                     "accountDescription": "Test Account",
-                                    "customerId": "8"
+                                    "customerId": "1"
                                 }
                                 """));
 

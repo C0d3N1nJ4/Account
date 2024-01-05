@@ -1,8 +1,8 @@
 package com.application.account;
 
+import com.application.customer.Customer;
 import com.application.customer.CustomerServiceClient;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +17,10 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Account create(Account account) {
+        Customer customer = getCustomer(account.getCustomerId());
+        if (customer == null) {
+            throw new RuntimeException("Customer not found");
+        }
         return accountRepository.save(account);
     }
 

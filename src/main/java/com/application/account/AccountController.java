@@ -29,8 +29,9 @@ public class AccountController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Optional<Account> findById(@PathVariable String id) {
-        if (accountService.existsById(id)) {
-            return accountService.findById(id);
+        Optional<Account> account = accountService.findById(id);
+        if (account.isPresent()) {
+            return account;
         } else {
             throw new AccountNotFoundException(id);
         }
