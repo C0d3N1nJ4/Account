@@ -9,7 +9,7 @@ import java.util.UUID;
 @Service
 public interface AccountService {
 
-        Account create(Account account);
+        Account createAccount(Account account);
 
         Optional<Account> findById(String id);
 

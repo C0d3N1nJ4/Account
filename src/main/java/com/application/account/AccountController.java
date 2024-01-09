@@ -1,5 +1,6 @@
 package com.application.account;
 
+import com.application.customer.CustomerDto;
 import com.application.exceptions.AccountNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -21,14 +22,15 @@ public class AccountController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public Account create(@RequestBody Account account) {
-        return accountService.create(account);
+    public Account createAccount(@RequestBody Account account) {
+
+        return accountService.createAccount(account);
     }
 
     @GetMapping("/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Account> findById(@PathVariable String id) {
+    public Optional<Account> findAccountById(@PathVariable String id) {
         Optional<Account> account = accountService.findById(id);
         if (account.isPresent()) {
             return account;
@@ -62,19 +64,19 @@ public class AccountController {
     @GetMapping("/customer/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public com.application.customer.Customer getCustomer(@PathVariable String id) {
+    public CustomerDto getCustomerById(@PathVariable String id) {
         return accountService.getCustomer(id);
     }
 
     @PutMapping("/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Account update(@PathVariable String id, @RequestBody Account account) {
+    public Account updateAccount(@PathVariable String id, @RequestBody Account account) {
         return accountService.update(id, account);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
+    public void deleteAccount(@PathVariable String id) {
         accountService.delete(id);
     }
 

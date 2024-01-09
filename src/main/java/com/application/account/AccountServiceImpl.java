@@ -1,6 +1,6 @@
 package com.application.account;
 
-import com.application.customer.Customer;
+import com.application.customer.CustomerDto;
 import com.application.customer.CustomerServiceClient;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -19,8 +19,8 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account create(Account account) {
-        Customer customer = getCustomer(account.getCustomerId());
+    public Account createAccount(Account account) {
+        CustomerDto customer = getCustomer(account.getCustomerId());
         if (customer == null) {
             throw new RuntimeException("Customer not found");
         }
@@ -56,7 +56,7 @@ public class AccountServiceImpl implements AccountService{
         accountRepository.deleteById(id);
     }
 
-    public com.application.customer.Customer getCustomer(String id) {
+    public CustomerDto getCustomer(String id) {
         return customerServiceClient.getCustomer(id);
     }
 }

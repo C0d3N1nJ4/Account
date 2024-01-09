@@ -18,9 +18,9 @@ public class CustomerServiceClient {
         this.restTemplate = restTemplate;
     }
 
-    public Customer getCustomer(String id) {
+    public CustomerDto getCustomer(String id) {
         try {
-            return restTemplate.getForObject(apiURL + "/" + id, Customer.class);
+            return restTemplate.getForObject(apiURL + "/" + id, CustomerDto.class);
         } catch (RestClientException e) {
             throw new CustomerNotFoundException("Customer with ID " + id + " not found.");
         }
