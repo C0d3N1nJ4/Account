@@ -32,25 +32,15 @@ public class AccountIntegrationTests {
     }
 
     @Test
-    @Disabled
-    public void getAllCustomersTest_StatusOK() throws Exception{
-        mockMvc.perform(get("/account/customer/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
     public void getAccountByIdTest_StatusNotFound() throws Exception{
         mockMvc.perform(get("/account/4").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
-
     }
 
     @Test
     public void getAccountByIdTest_StatusOK() throws Exception{
         mockMvc.perform(get("/account/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
     }
 
     @Test
@@ -59,22 +49,27 @@ public class AccountIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                    "id": "10",
+                                    "accountId": "10",
                                     "accountType": 1,
                                     "accountDescription": "Test Account",
+                                    "accountStatus": 0,
+                                    "currency": "EUR",
+                                    "balance": 750.00,
                                     "customerId": "1"
                                 }
                                 """))
                 .andExpect(status().isCreated())
                 .andExpect(content().json("""
                                 {
-                                    "id": "10",
+                                    "accountId": "10",
                                     "accountType": "CURRENT",
                                     "accountDescription": "Test Account",
+                                    "accountStatus": "ACTIVE",
+                                    "currency": "EUR",
+                                    "balance": 750.00,
                                     "customerId": "1"
                                 }
                                 """));
-
     }
 
     @Test
@@ -83,9 +78,12 @@ public class AccountIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                    "id": "10",
+                                    "accountId": "10",
                                     "accountType": 1,
                                     "accountDescription": "Test Account",
+                                    "accountStatus": 0,
+                                    "currency": "EUR",
+                                    "balance": 750.00,
                                     "customerId": "100"
                                 }
                                 """))
@@ -115,18 +113,24 @@ public class AccountIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                    "id": "10",
+                                    "accountId": "10",
                                     "accountType": 1,
                                     "accountDescription": "Test Account",
+                                    "accountStatus": 0,
+                                    "currency": "EUR",
+                                    "balance": 1050.00,
                                     "customerId": "1"
                                 }
                                 """))
                 .andExpect(status().isCreated())
                 .andExpect(content().json("""
                                 {
-                                    "id": "10",
+                                    "accountId": "10",
                                     "accountType": "CURRENT",
                                     "accountDescription": "Test Account",
+                                    "accountStatus": "ACTIVE",
+                                    "currency": "EUR",
+                                    "balance": 1050.00,
                                     "customerId": "1"
                                 }
                                 """));

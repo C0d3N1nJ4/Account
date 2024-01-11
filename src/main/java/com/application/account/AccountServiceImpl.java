@@ -2,6 +2,7 @@ package com.application.account;
 
 import com.application.customer.CustomerDto;
 import com.application.customer.CustomerServiceClient;
+import com.application.exceptions.CustomerNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,7 @@ public class AccountServiceImpl implements AccountService{
     public Account createAccount(Account account) {
         CustomerDto customer = getCustomer(account.getCustomerId());
         if (customer == null) {
-            throw new RuntimeException("Customer not found");
+            throw new CustomerNotFoundException(account.getCustomerId());
         }
         return accountRepository.save(account);
     }

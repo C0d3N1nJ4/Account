@@ -7,6 +7,5 @@ import java.util.UUID;
 
 public interface AccountRepository extends JpaRepository<Account, String> {
     List<Account> findByAccountStatus(AccountStatus accountStatus);
-
     List<Account> findByAccountType(AccountType accountType);
 }
