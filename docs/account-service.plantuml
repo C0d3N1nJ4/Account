@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ActorBorderColor DeepSkyBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF}
+
+autonumber 1 1 "<b>[00]"
+    group POST /account
+        api -> accountService: POST /account
+        database    accountDb    as accountDb
+        accountService -> accountDb: createAccount()
+        api <-[#green]- accountService: 200 OK
+    end
+    group GET /account/{id}
+        api -> accountService: GET /account/{id}
+        database    accountDb    as accountDb
+        accountService -> accountDb: getAccountById()
+        api <-[#green]- accountService: 200 OK
+        api <-[#red]- accountService: 404 Not Found
+    end
+@enduml

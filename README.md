@@ -17,4 +17,4 @@ The API documentation is available at [http://localhost:8080/swagger-ui.html](ht
 ### Prerequisites
 - Java 17
 - Maven 3.8.2
-- Customer service running on port 8080
+- [customer-service] - https://localhost:8080/customer to retrieve the customer information
