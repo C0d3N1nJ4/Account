@@ -20,4 +20,11 @@ autonumber 1 1 "<b>[00]"
         api <-[#green]- accountService: 200 OK
         api <-[#red]- accountService: 404 Not Found
     end
+    group GET /account/balance/{id}
+        api -> accountService: GET /account/balance/{id}
+        database    accountDb    as accountDb
+        accountService -> accountDb: getBalanceByAccountId()
+        api <-[#green]- accountService: 200 OK
+        api <-[#red]- accountService: 404 Not Found
+    end
 @enduml

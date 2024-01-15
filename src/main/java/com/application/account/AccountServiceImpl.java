@@ -2,6 +2,7 @@ package com.application.account;
 
 import com.application.customer.CustomerDto;
 import com.application.customer.CustomerServiceClient;
+import com.application.exceptions.AccountNotFoundException;
 import com.application.exceptions.CustomerNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -59,5 +60,14 @@ public class AccountServiceImpl implements AccountService{
 
     public CustomerDto getCustomer(String id) {
         return customerServiceClient.getCustomer(id);
+    }
+
+    public double getBalance(String accountId) {
+        Optional<Account> account = accountRepository.findById(accountId);
+        if (account.isPresent()) {
+            return account.get().getBalance();
+        } else {
+            throw new AccountNotFoundException(accountId);
+        }
     }
 }

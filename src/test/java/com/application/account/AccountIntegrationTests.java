@@ -160,7 +160,7 @@ public class AccountIntegrationTests {
     }
 
     @Test
-    public void getAccountByStatusTest_StatusBadRequest() throws Exception{
+    public void getAccountByStatusTest_StatusNotFound() throws Exception{
         mockMvc.perform(get("/account/filter/status").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
@@ -172,9 +172,15 @@ public class AccountIntegrationTests {
     }
 
     @Test
-    public void getAccountByTypeTest_StatusBadRequest() throws Exception{
+    public void getAccountByTypeTest_StatusNotFound() throws Exception{
         mockMvc.perform(get("/account/filter/type").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getBalanceTest_StatusOK() throws Exception{
+        mockMvc.perform(get("/account/balance/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
 }

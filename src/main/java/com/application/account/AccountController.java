@@ -80,4 +80,11 @@ public class AccountController {
         accountService.delete(id);
     }
 
+    @GetMapping("/balance/{accountId}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public double getBalance(@PathVariable String accountId) {
+        return accountService.getBalance(accountId);
+    }
+
 }
