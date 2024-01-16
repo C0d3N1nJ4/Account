@@ -11,8 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.http.converter.json.Jackson2ObjectMapperBuilder.json;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -180,6 +179,24 @@ public class AccountIntegrationTests {
     @Test
     public void getBalanceTest_StatusOK() throws Exception{
         mockMvc.perform(get("/account/balance/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getBalanceTest_StatusNotFound() throws Exception{
+        mockMvc.perform(get("/account/balance/100").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void updateBalanceTest_StatusOK() throws Exception{
+        mockMvc.perform(put("/account/balance/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                                {
+                                    "balance": 100.00
+                                }
+                                """))
                 .andExpect(status().isOk());
     }
 

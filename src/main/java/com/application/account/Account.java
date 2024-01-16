@@ -18,7 +18,7 @@ public class Account {
     AccountStatus accountStatus;
     Currency currency;
     String customerId;
-    int balance;
+    double balance;
     LocalDateTime createdDate;
     LocalDateTime updatedDate;
 

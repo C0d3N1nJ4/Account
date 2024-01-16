@@ -1,5 +1,6 @@
 package com.application.account;
 
+import com.application.balance.BalanceDto;
 import com.application.customer.CustomerDto;
 import com.application.customer.CustomerServiceClient;
 import com.application.exceptions.AccountNotFoundException;
@@ -22,8 +23,8 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Account createAccount(Account account) {
-        CustomerDto customer = getCustomer(account.getCustomerId());
-        if (customer == null) {
+        Optional<CustomerDto> customer = getCustomer(account.getCustomerId());
+        if (!customer.isPresent()) {
             throw new CustomerNotFoundException(account.getCustomerId());
         }
         return accountRepository.save(account);
@@ -58,14 +59,24 @@ public class AccountServiceImpl implements AccountService{
         accountRepository.deleteById(id);
     }
 
-    public CustomerDto getCustomer(String id) {
-        return customerServiceClient.getCustomer(id);
+    public Optional<CustomerDto> getCustomer(String id) {
+        return Optional.ofNullable(customerServiceClient.getCustomer(id));
     }
 
     public double getBalance(String accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
         if (account.isPresent()) {
             return account.get().getBalance();
+        } else {
+            throw new AccountNotFoundException(accountId);
+        }
+    }
+
+    public Account updateBalance(String accountId, BalanceDto balance) {
+        Optional<Account> account = accountRepository.findById(accountId);
+        if (account.isPresent()) {
+            account.get().setBalance(balance.getBalance());
+            return accountRepository.save(account.get());
         } else {
             throw new AccountNotFoundException(accountId);
         }

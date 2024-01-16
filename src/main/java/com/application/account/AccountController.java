@@ -1,15 +1,15 @@
 package com.application.account;
 
+import com.application.balance.BalanceDto;
 import com.application.customer.CustomerDto;
 import com.application.exceptions.AccountNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/account")
 public class AccountController {
 
@@ -20,7 +20,6 @@ public class AccountController {
     }
 
     @PostMapping
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public Account createAccount(@RequestBody Account account) {
 
@@ -28,7 +27,6 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Optional<Account> findAccountById(@PathVariable String id) {
         Optional<Account> account = accountService.findById(id);
@@ -40,7 +38,6 @@ public class AccountController {
     }
 
     @GetMapping("filter/status/{status}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Iterable<Account> findByAccountStatus(@PathVariable("status") String status) {
         if (status.equals("ACTIVE") || status.equals("INACTIVE")) {
@@ -51,7 +48,6 @@ public class AccountController {
     }
 
     @GetMapping("/filter/type/{type}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Iterable<Account> findByAccountType(@PathVariable("type") String accountType) {
         if (accountType.equals("SAVINGS") || accountType.equals("CHEQUE") || accountType.equals("CREDIT")) {
@@ -62,14 +58,12 @@ public class AccountController {
     }
 
     @GetMapping("/customer/{id}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public CustomerDto getCustomerById(@PathVariable String id) {
+    public Optional<CustomerDto> getCustomerById(@PathVariable String id) {
         return accountService.getCustomer(id);
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Account updateAccount(@PathVariable String id, @RequestBody Account account) {
         return accountService.update(id, account);
@@ -81,10 +75,14 @@ public class AccountController {
     }
 
     @GetMapping("/balance/{accountId}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public double getBalance(@PathVariable String accountId) {
         return accountService.getBalance(accountId);
     }
 
+    @PutMapping("/balance/{accountId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Account updateBalance(@PathVariable String accountId, @RequestBody BalanceDto balance) {
+        return accountService.updateBalance(accountId, balance);
+    }
 }
