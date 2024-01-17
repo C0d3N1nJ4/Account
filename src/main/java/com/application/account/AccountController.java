@@ -80,7 +80,7 @@ public class AccountController {
         return accountService.getBalance(accountId);
     }
 
-    @PutMapping("/balance/{accountId}")
+    @PostMapping("/balance/{accountId}")
     @ResponseStatus(HttpStatus.OK)
     public Account updateBalance(@PathVariable String accountId, @RequestBody BalanceDto balance) {
         return accountService.updateBalance(accountId, balance);
