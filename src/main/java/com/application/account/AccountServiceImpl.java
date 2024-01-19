@@ -3,6 +3,8 @@ package com.application.account;
 import com.application.balance.BalanceDto;
 import com.application.customer.CustomerDto;
 import com.application.customer.CustomerServiceClient;
+import com.application.data.AccountStatus;
+import com.application.data.AccountType;
 import com.application.exceptions.AccountNotFoundException;
 import com.application.exceptions.CustomerNotFoundException;
 import org.springframework.stereotype.Service;

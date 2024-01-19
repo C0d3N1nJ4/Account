@@ -2,6 +2,8 @@ package com.application.account;
 
 import com.application.balance.BalanceDto;
 import com.application.customer.CustomerDto;
+import com.application.data.AccountStatus;
+import com.application.data.AccountType;
 import com.application.exceptions.AccountNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

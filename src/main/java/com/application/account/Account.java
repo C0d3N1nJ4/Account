@@ -1,5 +1,7 @@
 package com.application.account;
 
+import com.application.data.AccountStatus;
+import com.application.data.AccountType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.PostPersist;
